@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HayViral</title>
+<link rel="shortcut icon" href="favicon.png" type="">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.x/tabler-icons.min.css" />
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --white:#FFFFFF;
+    --ink:#00303C;
+    --ink-2:#012734;
+    --ink-soft:#E7EFF1;
+    --teal-light:#EAF4F6;
+    --teal-mid:#C8E3E8;
+    --lime:#C6FD07;
+    --lime-dim:#A9D80B;
+    --gray-6:#5C747A;
+    --gray-4:#8FA3A8;
+    --line:#D8E4E6;
+    --radius:12px;
+    --radius-lg:20px;
+    --font:'Outfit',sans-serif;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:var(--font);background:#fff;color:var(--ink);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  .container{max-width:1140px;margin:0 auto;padding:0 24px;}
+  section{padding:88px 0;position:relative;}
+  a{color:inherit;text-decoration:none;}
+
+  /* ── NAV ── */
+  nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,0.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:1140px;margin:0 auto;padding:0 24px;height:68px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-logo img{height:36px;width:auto;display:block;}
+  .nav-links{display:flex;gap:30px;align-items:center;}
+  .nav-links a{font-size:14.5px;font-weight:500;color:var(--gray-6);}
+  .nav-links a:hover{color:var(--ink);}
+  .nav-cta{background:var(--ink);color:#fff!important;border-radius:30px;padding:11px 22px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;gap:6px;}
+  .nav-cta:hover{background:var(--ink-2);}
+  @media(max-width:760px){.nav-links a:not(.nav-cta){display:none;}}
+
+  /* ── HERO — grid only here ── */
+  .hero-section{
+    background:#fff;
+    color:var(--ink);
+    padding:80px 0 0;
+    overflow:hidden;
+    position:relative;
+  }
+  .hero-section::before{
+    content:'';
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(0,48,60,0.06) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,48,60,0.06) 1px,transparent 1px);
+    background-size:48px 48px;
+    pointer-events:none;
+    z-index:0;
+  }
+  .hero-inner{position:relative;z-index:2;text-align:center;padding-top:40px;padding-bottom:56px;}
+  .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink);font-weight:700;margin-bottom:26px;background:var(--lime);padding:7px 16px 7px 10px;border-radius:30px;}
+  .eyebrow .dot{width:7px;height:7px;border-radius:20%;background:var(--ink);}
+  h1{font-size:clamp(34px,5.6vw,60px);font-weight:800;color:var(--ink);line-height:1.06;letter-spacing:-0.02em;margin-bottom:22px;}
+  h1 em{font-style:normal;color:var(--gray-6);}
+  .hero-sub{font-size:18px;color:var(--gray-6);max-width:600px;margin:0 auto 38px;line-height:1.65;}
+  .hero-buttons{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary{background:var(--lime);color:var(--ink);border:none;border-radius:30px;padding:15px 30px;font-size:15.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .15s;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(198,253,7,0.6);}
+  .btn-ghost{background:#fff;color:var(--ink);border:1.5px solid var(--line);border-radius:30px;padding:15px 30px;font-size:15.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;}
+  .btn-ghost:hover{background:var(--ink-soft);}
+  .agent-strip{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:32px;}
+  .agent-chip{display:flex;align-items:center;gap:8px;background:#fff;border:1.5px solid var(--line);border-radius:30px;padding:9px 16px;font-size:13px;font-weight:500;color:var(--ink);}
+  .agent-chip i{font-size:16px;color:var(--ink);}
+
+  /* hero mock */
+  /* .hero-mock{position:relative;z-index:2;max-width:980px;margin:0 auto;border-radius:18px 18px 0 0;background:var(--ink-2);border:1px solid rgba(255,255,255,0.12);box-shadow:0 -4px 60px rgba(0,48,60,0.12);overflow:hidden;}
+  .mock-bar{display:flex;align-items:center;gap:7px;padding:13px 16px;border-bottom:1px solid rgba(255,255,255,0.08);}
+  .mock-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,0.2);}
+  .mock-body{padding:22px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+  @media(max-width:760px){.mock-body{grid-template-columns:repeat(2,1fr);}}
+  .mock-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:14px;}
+  .mock-card .mc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .mock-card .mc-top i{color:var(--lime);font-size:15px;}
+  .mock-card .mc-label{font-size:11px;color:#7E9BA1;font-weight:500;}
+  .mock-card .mc-num{font-size:22px;font-weight:800;color:#fff;}
+  .mock-card .mc-bar{height:5px;border-radius:3px;background:rgba(255,255,255,0.1);margin-top:10px;overflow:hidden;}
+  .mock-card .mc-bar i{display:block;height:100%;background:var(--lime);border-radius:3px;} */
+
+  /* ── SHARED SECTION STYLES ── */
+  .section-label{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--gray-4);text-align:center;margin-bottom:16px;font-weight:700;}
+  h2{font-size:clamp(26px,3.8vw,40px);font-weight:800;color:var(--ink);letter-spacing:-0.02em;line-height:1.18;text-align:center;margin-bottom:14px;}
+  .section-sub{font-size:16px;color:var(--gray-6);text-align:center;margin-bottom:52px;max-width:600px;margin-left:auto;margin-right:auto;}
+
+  /* ── PROBLEM ── */
+  .chaos-section{background:#fff;}
+  .tool-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:26px;}
+  @media(max-width:700px){.tool-grid{grid-template-columns:repeat(3,1fr);}}
+  .tool-chip{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:16px 10px;text-align:center;transition:all .18s;}
+  .tool-chip:hover{border-color:var(--ink);transform:translateY(-3px);box-shadow:0 10px 24px -12px rgba(0,48,60,0.18);}
+  .tool-chip .tc-icon{font-size:24px;color:var(--gray-6);margin-bottom:8px;}
+  .tool-chip .tc-name{font-size:12px;font-weight:700;color:var(--ink);}
+  .tool-chip .tc-task{font-size:10.5px;color:var(--gray-4);margin-top:2px;}
+  .pain-tags{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:24px;}
+  .pain-tag{display:inline-flex;align-items:center;gap:6px;background:var(--ink-soft);color:var(--ink);border:1px solid var(--line);border-radius:30px;padding:7px 15px;font-size:12.5px;font-weight:600;}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin:48px 0 0;}
+  @media(max-width:600px){.stat-grid{grid-template-columns:1fr;}}
+  .stat-card{background:var(--ink);color:#fff;border-radius:var(--radius-lg);padding:32px 24px;text-align:center;}
+  .stat-num{font-size:42px;font-weight:800;color:var(--lime);letter-spacing:-0.02em;line-height:1;}
+  .stat-desc{font-size:13.5px;color:#A9C2C8;margin-top:10px;line-height:1.5;}
+
+  /* ── MODULES ── */
+  .modmap-section{background:var(--teal-light);}
+  .modmap-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:44px;}
+  @media(max-width:980px){.modmap-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:620px){.modmap-grid{grid-template-columns:repeat(2,1fr);}}
+  .mod-card{border:1.5px solid var(--teal-mid);border-radius:var(--radius-lg);padding:22px 16px;background:#fff;position:relative;transition:all .18s;}
+  .mod-card:hover{border-color:var(--ink);box-shadow:0 16px 36px -16px rgba(0,48,60,0.2);transform:translateY(-4px);}
+  .mod-num{position:absolute;top:14px;right:14px;font-size:10px;color:var(--gray-4);font-weight:700;letter-spacing:0.05em;}
+  .mod-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:14px;box-shadow:0 4px 12px rgba(0,0,0,0.08);}
+  .mod-title{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:6px;}
+  .mod-desc{font-size:11.5px;color:var(--gray-6);line-height:1.55;}
+  /* icon colors per module */
+  .mi-1{background:#E8F5E9;color:#2E7D32;}
+  .mi-2{background:#FFF3E0;color:#E65100;}
+  .mi-3{background:#E3F2FD;color:#1565C0;}
+  .mi-4{background:#F3E5F5;color:#6A1B9A;}
+  .mi-5{background:#FCE4EC;color:#AD1457;}
+  .mi-6{background:#E0F7FA;color:#00838F;}
+  .mi-7{background:#FFF8E1;color:#F57F17;}
+  .mi-8{background:#EFEBE9;color:#4E342E;}
+  .mi-9{background:#E8EAF6;color:#283593;}
+  .mi-10{background:#F1F8E9;color:#33691E;}
+
+  /* ── DEEP DIVE sections — all LIGHT ── */
+  .deep-section{padding:88px 0;background:#fff;}
+  .deep-section.alt{background:var(--teal-light);}
+  .deep-head{display:flex;align-items:center;gap:14px;margin-bottom:10px;justify-content:center;}
+  .deep-tag{font-size:11px;font-weight:800;color:var(--ink);background:var(--lime);border-radius:8px;padding:5px 12px;letter-spacing:0.05em;}
+
+  /* dashboard */
+  .dash-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:40px;}
+  @media(max-width:900px){.dash-grid{grid-template-columns:repeat(3,1fr);}}
+  @media(max-width:620px){.dash-grid{grid-template-columns:repeat(2,1fr);}}
+  .platform-card{border:1.5px solid var(--line);border-radius:var(--radius-lg);background:#fff;padding:17px;transition:all .18s;}
+  .platform-card:hover{box-shadow:0 14px 30px -16px rgba(0,48,60,0.18);transform:translateY(-2px);}
+  .platform-head{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+  .platform-head i{font-size:18px;color:var(--ink);}
+  .platform-head span{font-size:13px;font-weight:700;color:var(--ink);}
+  .metric-row{display:flex;justify-content:space-between;font-size:12px;color:var(--gray-6);padding:5px 0;border-bottom:1px solid var(--line);}
+  .metric-row:last-child{border-bottom:none;}
+  .metric-row b{color:var(--ink);font-weight:700;}
+
+  /* form card */
+  .form-card{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius-lg);padding:32px;margin-top:40px;box-shadow:0 20px 50px -28px rgba(0,48,60,0.1);}
+  .form-row{margin-bottom:22px;}
+  .form-row label{font-size:11.5px;font-weight:700;color:var(--gray-6);text-transform:uppercase;letter-spacing:0.05em;display:block;margin-bottom:10px;}
+  .tag-input{display:flex;gap:8px;flex-wrap:wrap;border:1.5px solid var(--line);border-radius:var(--radius);padding:12px;}
+  .tag-pill{background:var(--ink);color:#fff;font-size:12.5px;font-weight:600;border-radius:14px;padding:5px 12px;}
+  .check-row{display:flex;gap:9px;flex-wrap:wrap;}
+  .check-pill{font-size:12.5px;border:1.5px solid var(--line);border-radius:14px;padding:7px 14px;color:var(--gray-6);font-weight:500;}
+  .check-pill.on{background:var(--lime);border-color:var(--lime-dim);color:var(--ink);font-weight:700;}
+
+  /* calendar */
+  .cal-tabs{display:flex;gap:8px;margin-top:40px;flex-wrap:wrap;}
+  .cal-tab{font-size:12.5px;font-weight:600;border-radius:10px 10px 0 0;padding:10px 18px;background:var(--line);color:var(--gray-6);}
+  .cal-tab.active{background:#fff;color:var(--ink);border:1.5px solid var(--line);border-bottom:none;font-weight:700;}
+  .cal-table-wrap{overflow-x:auto;border:1.5px solid var(--line);border-radius:0 var(--radius-lg) var(--radius-lg) var(--radius-lg);}
+  .cal-table{width:100%;border-collapse:collapse;font-size:12px;min-width:780px;}
+  .cal-table th{padding:12px 14px;text-align:left;font-weight:700;color:var(--gray-6);background:var(--teal-light);border-bottom:1px solid var(--line);white-space:nowrap;}
+  .cal-table td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--gray-6);background:#fff;white-space:nowrap;}
+  .status-pill{font-size:10.5px;font-weight:700;border-radius:10px;padding:4px 10px;}
+  .status-ready{background:var(--lime);color:var(--ink);}
+  .status-pending{background:var(--ink-soft);color:var(--gray-6);}
+  .status-scheduled{background:var(--ink);color:#fff;}
+  .cal-btn{font-size:11px;font-weight:700;border-radius:8px;padding:5px 10px;border:none;margin-right:5px;cursor:pointer;}
+  .cal-btn.create{background:var(--ink-soft);color:var(--ink);}
+  .cal-btn.publish{background:var(--ink);color:#fff;}
+
+  /* trend */
+  .trend-search{display:flex;gap:10px;background:#fff;border:1.5px solid var(--line);border-radius:30px;padding:12px 20px;margin-top:40px;align-items:center;flex-wrap:wrap;box-shadow:0 8px 24px -16px rgba(0,48,60,0.12);}
+  .trend-search i{color:var(--gray-4);}
+  .trend-search input{border:none;outline:none;font-size:14px;flex:1;min-width:140px;font-family:inherit;background:transparent;color:var(--ink);}
+  .trend-filter{font-size:12px;background:var(--teal-light);border:1px solid var(--line);border-radius:20px;padding:6px 13px;color:var(--gray-6);font-weight:500;}
+  .trend-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px;}
+  @media(max-width:700px){.trend-cols{grid-template-columns:1fr;}}
+  .trend-col-head{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.06em;color:var(--gray-6);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+  .trend-item{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:11px 14px;margin-bottom:9px;font-size:12.5px;color:var(--ink);display:flex;justify-content:space-between;align-items:center;font-weight:500;}
+  .save-pill{font-size:10.5px;color:var(--ink);background:var(--lime);border-radius:12px;padding:3px 10px;font-weight:700;}
+
+  /* ── CONTENT BREAKDOWN — LIGHT ── */
+  .breakdown-section{background:var(--teal-light);}
+  .filmstrip-wrap{margin-top:44px;background:#fff;border:1.5px solid var(--line);border-radius:var(--radius-lg);padding:28px 24px 32px;box-shadow:0 20px 50px -24px rgba(0,48,60,0.12);}
+  .filmstrip{display:flex;gap:8px;overflow-x:auto;padding-bottom:16px;}
+  .frame{flex-shrink:0;width:116px;}
+  .frame-thumb{width:116px;height:154px;border-radius:10px;background:linear-gradient(160deg,#0E6E8C,#01202B);position:relative;overflow:hidden;border:1.5px solid var(--line);}
+  .frame-thumb.hook{background:linear-gradient(160deg,#6EBD3F,#3A7A10);}
+  .frame-thumb.cut{background:linear-gradient(160deg,#2B8A9E,#024E63);}
+  .frame-tag{position:absolute;bottom:7px;left:6px;right:6px;font-size:8.5px;color:#fff;background:rgba(0,0,0,0.45);border-radius:5px;padding:3px 5px;text-align:center;font-weight:800;letter-spacing:0.04em;}
+  .frame-thumb.hook .frame-tag{color:var(--ink);background:rgba(255,255,255,0.9);}
+  .frame-time{font-size:10.5px;color:var(--gray-4);margin-top:8px;text-align:center;font-weight:600;}
+  .breakdown-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;justify-content:center;}
+  .bd-tag{font-size:12px;color:var(--ink);background:var(--ink-soft);border:1px solid var(--line);border-radius:11px;padding:6px 14px;font-weight:500;}
+  .breakdown-legend{display:flex;gap:24px;justify-content:center;margin-top:18px;flex-wrap:wrap;}
+  .bl-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--gray-6);}
+  .bl-dot{width:10px;height:10px;border-radius:3px;}
+
+  /* ── CANVAS — LIGHT ── */
+  .canvas-wrap{margin-top:44px;background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:var(--radius-lg);padding:32px;}
+  .canvas-wrap svg{width:100%;height:auto;}
+  .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px;}
+  @media(max-width:700px){.feature-grid{grid-template-columns:1fr;}}
+  .feat-card{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius-lg);padding:26px 22px;transition:all .18s;}
+  .feat-card:hover{border-color:var(--ink);box-shadow:0 14px 30px -16px rgba(0,48,60,0.18);transform:translateY(-2px);}
+  .feat-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:15px;}
+  .feat-title{font-size:14.5px;font-weight:700;color:var(--ink);margin-bottom:7px;}
+  .feat-desc{font-size:13px;color:var(--gray-6);line-height:1.6;}
+
+  /* ── VS TABLE — LIGHT ── */
+  .vs-section{background:#fff;}
+  .vs-table-wrap{overflow-x:auto;margin-top:40px;border-radius:var(--radius-lg);border:1.5px solid var(--line);}
+  .vs-table{width:100%;border-collapse:collapse;font-size:13.5px;min-width:640px;}
+  .vs-table th{padding:14px 16px;text-align:left;font-weight:700;color:var(--gray-6);border-bottom:1px solid var(--line);background:var(--teal-light);}
+  .vs-table th:not(:first-child){text-align:center;}
+  .vs-table th.you-head{color:var(--ink);background:var(--lime);font-weight:800;}
+  .vs-table td{padding:14px 16px;border-bottom:1px solid var(--line);color:var(--gray-6);background:#fff;}
+  .vs-table td:not(:first-child){text-align:center;}
+  .vs-table td.you-col{background:#F5FFCF;}
+  .vs-table tr:last-child td{border-bottom:none;}
+  .row-label{color:var(--ink);font-weight:600;}
+  .check{color:#2E7D32;font-size:17px;font-weight:800;}
+  .cross{color:var(--gray-4);font-size:16px;}
+  .partial{color:var(--gray-6);font-size:11.5px;font-weight:700;}
+
+  /* ── HOW IT WORKS — LIGHT ── */
+  .how-section{background:var(--teal-light);}
+  .timeline{max-width:660px;margin:44px auto 0;position:relative;}
+  .tl-line{position:absolute;left:24px;top:24px;bottom:24px;width:2px;background:var(--teal-mid);}
+  .tl-item{display:flex;gap:24px;margin-bottom:36px;}
+  .tl-dot{width:48px;height:48px;border-radius:50%;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--lime);font-size:20px;z-index:1;position:relative;box-shadow:0 4px 14px rgba(0,48,60,0.25);}
+  .tl-body{padding-top:10px;}
+  .tl-title{font-size:15.5px;font-weight:700;color:var(--ink);margin-bottom:5px;}
+  .tl-desc{font-size:13.5px;color:var(--gray-6);line-height:1.65;}
+  .insight-box{background:#fff;border:1.5px solid var(--teal-mid);border-radius:var(--radius-lg);padding:32px 36px;margin-top:52px;text-align:center;box-shadow:0 8px 24px -12px rgba(0,48,60,0.1);}
+  .insight-box p{font-size:15px;color:var(--ink);line-height:1.7;}
+  .insight-box strong{color:var(--ink-2);}
+
+  /* ── CTA ── */
+  .cta-section{background:var(--ink);text-align:center;overflow:hidden;position:relative;padding:100px 0;}
+  .cta-section .section-label{color:rgba(255,255,255,0.5);}
+  .cta-section h2{color:#fff;}
+  .cta-section .section-sub{color:#A9C2C8;}
+  .cta-section .btn-primary{background:var(--lime);color:var(--ink);}
+  .cta-section .btn-ghost{color:#fff;border-color:rgba(255,255,255,0.25);background:transparent;}
+  .cta-section .btn-ghost:hover{background:rgba(255,255,255,0.08);}
+
+  footer{padding:36px 0;text-align:center;font-size:13px;color:var(--gray-4);background:#fff;border-top:1px solid var(--line);}
+
+  @keyframes fade-up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+  .fade-up{opacity:0;animation:fade-up .5s ease forwards;}
+
+  /* h1 dark highlight - only "One workspace" */
+  .h1-dark-word{
+    display:inline-block;
+    background:var(--ink);
+    color:#fff;
+    padding:2px 18px 6px;
+    font-style:normal;
+    vertical-align:middle;
+    margin-right:4px;
+  }
+  .h1-plain{
+    display:inline;
+    color:var(--ink);
+    font-style:normal;
+  }
+
+  /* floating metric cards */
+  .float-cards-wrapper{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:3;
+    overflow:hidden;
+  }
+  .float-card{
+    position:absolute;
+    background:var(--ink-2);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:14px;
+    padding:14px 18px;
+    color:#fff;
+    pointer-events:none;
+    box-shadow:0 8px 32px rgba(0,48,60,0.35);
+    min-width:130px;
+  }
+  .float-card .fc-label{font-size:10px;color:#7E9BA1;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:5px;}
+  .float-card .fc-num{font-size:22px;font-weight:800;color:#fff;line-height:1;}
+  .float-card .fc-icon{font-size:14px;color:var(--lime);margin-bottom:4px;}
+  .float-card .fc-bar{height:4px;border-radius:2px;background:rgba(255,255,255,0.1);margin-top:10px;overflow:hidden;}
+  .float-card .fc-bar i{display:block;height:100%;background:var(--lime);border-radius:2px;}
+
+  /* nav logo */
+  .nav-logo-link{display:flex;align-items:center;}
+
+  /* svg canvas labels */
+  .sv-b{font-family:var(--font);font-size:13px;font-weight:700;}
+  .sv-s{font-family:var(--font);font-size:11.5px;fill:var(--gray-6);}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo-link"><img src="Logo.svg" width="120px" /></a>
+    <div class="nav-links">
+      <a href="#problem">The problem</a>
+      <a href="#modules">Modules</a>
+      <a href="#breakdown">Content breakdown</a>
+      <a href="#how-it-works">How it works</a>
+      <a class="nav-cta" href="https://form.jotform.com/261795977170068">Sign up <i class="ti ti-arrow-right" style="font-size:13px;"></i></a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO (grid here only) -->
+<section class="hero-section">
+  <!-- Floating metric cards -->
+  <div class="float-cards-wrapper">
+    <!-- Left side: Instagram (top-left), TikTok (bottom-left) -->
+    <div class="float-card" style="left:150px;top:130px;transform:rotate(-6deg);">
+      <div class="fc-icon"><i class="ti ti-brand-instagram"></i></div>
+      <div class="fc-label">Instagram</div>
+      <div class="fc-num">48.2k</div>
+      <div class="fc-bar"><i style="width:71%;"></i></div>
+    </div>
+    <div class="float-card" style="left:230px;bottom:120px;transform:rotate(4deg);">
+      <div class="fc-icon"><i class="ti ti-brand-tiktok"></i></div>
+      <div class="fc-label">TikTok</div>
+      <div class="fc-num">2.4M</div>
+      <div class="fc-bar"><i style="width:64%;"></i></div>
+    </div>
+    <!-- Right side: LinkedIn (top-right), Engagement (bottom-right) -->
+    <div class="float-card" style="right:140px;top:170px;transform:rotate(5deg);">
+      <div class="fc-icon"><i class="ti ti-brand-linkedin"></i></div>
+      <div class="fc-label">LinkedIn</div>
+      <div class="fc-num">6.3k</div>
+      <div class="fc-bar"><i style="width:48%;"></i></div>
+    </div>
+    <div class="float-card" style="right:300px;bottom:190px;transform:rotate(-4deg);">
+      <div class="fc-icon"><i class="ti ti-trending-up"></i></div>
+      <div class="fc-label">Engagement</div>
+      <div class="fc-num">+18%</div>
+      <div class="fc-bar"><i style="width:82%;"></i></div>
+    </div>
+  </div>
+  <div class="container hero-inner">
+    <span class="eyebrow"><span class="dot"></span>For social teams &amp; creators running campaigns solo</span>
+    <h1>Ideate. Create. Publish.<br><span class="h1-dark-word">One workspace</span><span class="h1-plain">, not ten tabs.</span></h1>
+    <p class="hero-sub">HayViral unifies multiple AI agents into a single pipeline, creating an end-to-end 360° marketing tool that automates strategy, trend research, scripting, editing, and publishing.</p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="https://form.jotform.com/261795977170068">Join our Wishlist <i class="ti ti-arrow-right"></i></a>
+      <a class="btn-ghost" href="#modules">See the modules</a>
+    </div>
+    <div class="agent-strip">
+      <div class="agent-chip"><i class="ti ti-sparkles"></i> Open Canvas — ideation &amp; Generating</div>
+      <div class="agent-chip"><i class="ti ti-palette"></i> 360° Marketing — AI Tools</div>
+      <div class="agent-chip"><i class="ti ti-message-circle"></i> Automation — Customization</div>
+    </div>
+  </div>
+  <div class="container" style="position:relative;z-index:2;padding-bottom:0;">
+    <!-- <div class="hero-mock">
+      <div class="mock-bar"><div class="mock-dot"></div><div class="mock-dot"></div><div class="mock-dot"></div></div>
+      <div class="mock-body">
+        <div class="mock-card"><div class="mc-top"><span class="mc-label">INSTAGRAM</span><i class="ti ti-brand-instagram"></i></div><div class="mc-num">48.2k</div><div class="mc-bar"><i style="width:71%;"></i></div></div>
+        <div class="mock-card"><div class="mc-top"><span class="mc-label">TIKTOK</span><i class="ti ti-brand-tiktok"></i></div><div class="mc-num">2.4M</div><div class="mc-bar"><i style="width:64%;"></i></div></div>
+        <div class="mock-card"><div class="mc-top"><span class="mc-label">LINKEDIN</span><i class="ti ti-brand-linkedin"></i></div><div class="mc-num">6.3k</div><div class="mc-bar"><i style="width:48%;"></i></div></div>
+        <div class="mock-card"><div class="mc-top"><span class="mc-label">ENGAGEMENT</span><i class="ti ti-trending-up"></i></div><div class="mc-num">+18%</div><div class="mc-bar"><i style="width:82%;"></i></div></div>
+      </div>
+    </div>
+  </div> -->
+</section>
+
+<!-- PROBLEM -->
+<section class="chaos-section" id="problem">
+  <div class="container">
+    <p class="section-label">Your current workflow</p>
+    <h2>One post, ten tools, zero memory between them</h2>
+    <p class="section-sub">You're not running a campaign. You're relaying information between apps that don't talk to each other.</p>
+    <div class="tool-grid">
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-brand-openai"></i></div><div class="tc-name">ChatGPT or Claude</div><div class="tc-task">brainstorm</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-palette"></i></div><div class="tc-name">Canva or Photoshop</div><div class="tc-task">design</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-movie"></i></div><div class="tc-name">CapCut or Premium Pro</div><div class="tc-task">edit video</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-table"></i></div><div class="tc-name">Google Sheets or Trello</div><div class="tc-task">content calendar</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-chart-bar"></i></div><div class="tc-name">Multiple SM Tools</div><div class="tc-task">reporting</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-spy"></i></div><div class="tc-name">Sprout Social or Rival IQ</div><div class="tc-task">competitor research</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-brand-whatsapp"></i></div><div class="tc-name">WhatsApp or MS Teams</div><div class="tc-task">team handoff</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-brand-tiktok"></i></div><div class="tc-name">Multiple posting tools</div><div class="tc-task">post manually</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-music"></i></div><div class="tc-name">Multiple apps</div><div class="tc-task">trend audio</div></div>
+      <div class="tool-chip"><div class="tc-icon"><i class="ti ti-file-description"></i></div><div class="tc-name">Notion or Google Docs</div><div class="tc-task">strategy doc</div></div>
+    </div>
+    <div class="pain-tags">
+      <span class="pain-tag"><i class="ti ti-arrows-shuffle"></i> constant app-switching</span>
+      <span class="pain-tag"><i class="ti ti-users"></i> no shared task view</span>
+      <span class="pain-tag"><i class="ti ti-eye-off"></i> no competitor breakdown</span>
+      <span class="pain-tag"><i class="ti ti-clock-hour-4"></i> no automation broken structure</span>
+    </div>
+    <!-- <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">10+</div><div class="stat-desc">separate apps stitched together for one campaign</div></div>
+      <div class="stat-card"><div class="stat-num">0</div><div class="stat-desc">show you frame-by-frame why a competitor's video worked</div></div>
+      <div class="stat-card"><div class="stat-num">1</div><div class="stat-desc">login needed once HayViral replaces the stack</div></div>
+    </div> -->
+  </div>
+</section>
+
+<!-- MODULES -->
+<section class="modmap-section" id="modules">
+  <div class="container">
+    <p class="section-label">The architecture</p>
+    <h2>Ten modules. One pipeline.</h2>
+    <p class="section-sub">Each module is a stage of the same campaign — work moves from strategy into the calendar, creation, publishing, and reporting without leaving HayViral.</p>
+    <div class="modmap-grid">
+      <div class="mod-card">
+  <span class="mod-num">01</span>
+  <div class="mod-icon mi-1">
+    <i class="ti ti-layout-dashboard" style="color: #00303C;"></i>
+  </div>
+  <div class="mod-title">Dashboard</div>
+  <div class="mod-desc">Live analytics across all platforms — followers, engagement, retention in one view.</div>
+</div>
+      <div class="mod-card">
+        <span class="mod-num">02</span>
+        <div class="mod-icon mi-2"><i class="ti ti-target-arrow"></i></div>
+        <div class="mod-title">Content Strategy</div>
+        <div class="mod-desc">AI-generated playbooks from your niche, audience, and chosen channels.</div>
+      </div>
+      <div class="mod-card">
+        <span class="mod-num">03</span>
+        <div class="mod-icon mi-3"><i class="ti ti-calendar-event"></i></div>
+        <div class="mod-title">Content Calendar</div>
+        <div class="mod-desc">Collaborative grid to schedule, assign, and track every post across the team.</div>
+      </div>
+      <div class="mod-card">
+        <span class="mod-num">04</span>
+        <div class="mod-icon mi-4"><i class="ti ti-radar-2"></i></div>
+        <div class="mod-title">Trend Scraping</div>
+        <div class="mod-desc">Always-on scanner for rising audio, hashtags, and hooks before they saturate.</div>
+      </div>
+      <div class="mod-card">
+        <span class="mod-num">05</span>
+        <div class="mod-icon mi-5"><i class="ti ti-writing"></i></div>
+        <div class="mod-title">Scripting &amp; Copy</div>
+        <div class="mod-desc">AI writes scripts, captions, and platform-specific copy from your trend data.</div>
+      </div>
+      <div class="mod-card">
+        <span class="mod-num">06</span>
+        <div class="mod-icon mi-6"><i class="ti ti-send"></i></div>
+        <div class="mod-title">Publishing</div>
+        <div class="mod-desc">Native APIs handle queuing, auto-tagging, and hands-free multi-platform posting.</div>
+      </div>
+      <div class="mod-card">
+        <span class="mod-num">07</span>
+        <div class="mod-icon mi-7"><i class="ti ti-chart-line"></i></div>
+        <div class="mod-title">Reporting</div>
+        <div class="mod-desc">Link clicks, DM conversions, audience retention — real business metrics.</div>
+      </div>
+      <div class="mod-card">
+        <span class="mod-num">08</span>
+        <div class="mod-icon mi-8"><i class="ti ti-video-minus"></i></div>
+        <div class="mod-title">Content Breakdown</div>
+        <div class="mod-desc">Dissect a competitor's video frame-by-frame: hooks, transitions, audio spikes.</div>
+      </div>
+      <div class="mod-card">
+        <span class="mod-num">09</span>
+        <div class="mod-icon mi-9"><i class="ti ti-wand"></i></div>
+        <div class="mod-title">Image &amp; Video Editing</div>
+        <div class="mod-desc">Drop media in, type a prompt: silences stripped, captions burned in automatically.</div>
+      </div>
+      <div class="mod-card">
+        <span class="mod-num">10</span>
+        <div class="mod-icon mi-10"><i class="ti ti-settings-2"></i></div>
+        <div class="mod-title">Settings</div>
+        <div class="mod-desc">Workspace permissions, connected accounts, AI model config, and billing.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DASHBOARD DEEP DIVE -->
+<section class="deep-section">
+  <div class="container">
+    <div class="deep-head"><span class="deep-tag">MODULE 01</span></div>
+    <h2>Dashboard — every platform, one screen</h2>
+    <p class="section-sub">Followers, engagement, and retention — broken out per platform, not blended into a meaningless average.</p>
+    <div class="dash-grid">
+      <div class="platform-card"><div class="platform-head"><i class="ti ti-brand-instagram"></i><span>Instagram</span></div>
+        <div class="metric-row"><span>Followers</span><b>48.2k</b></div>
+        <div class="metric-row"><span>Engagement</span><b>6.1%</b></div>
+        <div class="metric-row"><span>Retention</span><b>71%</b></div>
+      </div>
+      <div class="platform-card"><div class="platform-head"><i class="ti ti-brand-tiktok"></i><span>TikTok</span></div>
+        <div class="metric-row"><span>Followers</span><b>112k</b></div>
+        <div class="metric-row"><span>Views (30d)</span><b>2.4M</b></div>
+        <div class="metric-row"><span>Retention</span><b>64%</b></div>
+      </div>
+      <div class="platform-card"><div class="platform-head"><i class="ti ti-brand-x"></i><span>X / Twitter</span></div>
+        <div class="metric-row"><span>Followers</span><b>9.8k</b></div>
+        <div class="metric-row"><span>Comments</span><b>312</b></div>
+        <div class="metric-row"><span>Engagement</span><b>3.4%</b></div>
+      </div>
+      <div class="platform-card"><div class="platform-head"><i class="ti ti-brand-linkedin"></i><span>LinkedIn</span></div>
+        <div class="metric-row"><span>Followers</span><b>6.3k</b></div>
+        <div class="metric-row"><span>Views</span><b>41.7k</b></div>
+        <div class="metric-row"><span>Engagement</span><b>4.8%</b></div>
+      </div>
+      <div class="platform-card"><div class="platform-head"><i class="ti ti-brand-youtube"></i><span>YouTube</span></div>
+        <div class="metric-row"><span>Subscribers</span><b>21.5k</b></div>
+        <div class="metric-row"><span>Watch time</span><b>4.1k hrs</b></div>
+        <div class="metric-row"><span>Retention</span><b>58%</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT STRATEGY -->
+<section class="deep-section alt">
+  <div class="container">
+    <div class="deep-head"><span class="deep-tag">MODULE 02</span></div>
+    <h2>Content Strategy — define once, generate forever</h2>
+    <p class="section-sub">Three inputs turn into a full playbook. Run as many strategies as you have clients or product lines.</p>
+    <div class="form-card">
+      <div class="form-row">
+        <label><i class="ti ti-users" style="margin-right:6px;"></i>Target audience &amp; persona</label>
+        <div class="tag-input"><span class="tag-pill">Tech interns</span><span class="tag-pill">Enterprise SaaS buyers</span><span class="tag-pill">Local restaurant owners</span></div>
+      </div>
+      <div class="form-row">
+        <label><i class="ti ti-target" style="margin-right:6px;"></i>Core topic / niche</label>
+        <div class="tag-input"><span class="tag-pill">B2B SaaS — DevOps tooling</span></div>
+      </div>
+      <div class="form-row" style="margin-bottom:0;">
+        <label><i class="ti ti-share" style="margin-right:6px;"></i>Content channels</label>
+        <div class="check-row">
+          <span class="check-pill on"><i class="ti ti-brand-instagram"></i> Instagram</span>
+          <span class="check-pill on"><i class="ti ti-brand-linkedin"></i> LinkedIn</span>
+          <span class="check-pill"><i class="ti ti-brand-facebook"></i> Facebook</span>
+          <span class="check-pill on"><i class="ti ti-brand-tiktok"></i> TikTok</span>
+          <span class="check-pill"><i class="ti ti-brand-x"></i> X</span>
+          <span class="check-pill"><i class="ti ti-brand-youtube"></i> YouTube</span>
+        </div>
+      </div>
+
+      <!-- Generated playbook output -->
+      <div style="margin-top:28px;border-top:1.5px solid var(--line);padding-top:24px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:22px;">
+          <div style="background:var(--lime);border-radius:8px;padding:5px 12px;font-size:11px;font-weight:800;color:var(--ink);letter-spacing:0.05em;display:flex;align-items:center;gap:6px;"><i class="ti ti-sparkles"></i> GENERATED PLAYBOOK</div>
+          <span style="font-size:12px;color:var(--gray-4);">9 post ideas · 3 channels · weekly schedule</span>
+        </div>
+
+        <!-- Post ideas list -->
+        <div style="margin-bottom:18px;">
+          <div style="font-size:11px;font-weight:700;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;">Suggested post ideas</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+            <div style="background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:10px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--ink);color:#fff;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">IG · TikTok</span>
+              <span style="font-size:12px;color:var(--ink);font-weight:600;line-height:1.45;">"3 DevOps mistakes killing your deploy speed"</span>
+            </div>
+            <div style="background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:10px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--ink);color:#fff;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">LinkedIn</span>
+              <span style="font-size:12px;color:var(--ink);font-weight:600;line-height:1.45;">"How we cut our CI pipeline from 40min → 8min"</span>
+            </div>
+            <div style="background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:10px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--ink);color:#fff;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">TikTok</span>
+              <span style="font-size:12px;color:var(--ink);font-weight:600;line-height:1.45;">"Day in the life: SaaS founder ships 3 features before lunch"</span>
+            </div>
+            <div style="background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:10px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--ink);color:#fff;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">LinkedIn</span>
+              <span style="font-size:12px;color:var(--ink);font-weight:600;line-height:1.45;">"Enterprise SaaS buyers care about 1 thing: uptime. Here's proof."</span>
+            </div>
+            <div style="background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:10px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--ink);color:#fff;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">IG</span>
+              <span style="font-size:12px;color:var(--ink);font-weight:600;line-height:1.45;">"Before/after: restaurant's online orders using our stack"</span>
+            </div>
+            <div style="background:var(--teal-light);border:1px solid var(--teal-mid);border-radius:10px;padding:11px 14px;display:flex;gap:10px;align-items:flex-start;">
+              <span style="background:var(--ink);color:#fff;border-radius:6px;padding:2px 7px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0;">TikTok</span>
+              <span style="font-size:12px;color:var(--ink);font-weight:600;line-height:1.45;">"Hot take: most DevOps teams are optimizing the wrong metric"</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly schedule + best times side by side -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
+          <div style="background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:12px;padding:16px 18px;">
+            <div style="font-size:11px;font-weight:700;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;display:flex;align-items:center;gap:6px;"><i class="ti ti-calendar-week" style="color:var(--ink);"></i> Weekly posting schedule</div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;"><span style="font-weight:600;color:var(--ink);">Mon &amp; Wed</span><span style="color:var(--gray-6);">LinkedIn carousel</span><span style="background:var(--ink);color:#fff;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;">2×</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;"><span style="font-weight:600;color:var(--ink);">Tue, Thu</span><span style="color:var(--gray-6);">TikTok Reel</span><span style="background:var(--ink);color:#fff;border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;">2×</span></div>
+              <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;"><span style="font-weight:600;color:var(--ink);">Fri</span><span style="color:var(--gray-6);">Instagram Reel</span><span style="background:var(--lime);color:var(--ink);border-radius:6px;padding:2px 8px;font-size:10px;font-weight:700;">1×</span></div>
+            </div>
+          </div>
+          <div style="background:var(--teal-light);border:1.5px solid var(--teal-mid);border-radius:12px;padding:16px 18px;">
+            <div style="font-size:11px;font-weight:700;color:var(--gray-4);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;display:flex;align-items:center;gap:6px;"><i class="ti ti-clock" style="color:var(--ink);"></i> Best posting times</div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><i class="ti ti-brand-instagram" style="color:var(--gray-6);"></i><span style="font-weight:600;color:var(--ink);">Instagram</span><span style="color:var(--gray-6);">4–6 pm weekdays</span></div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><i class="ti ti-brand-tiktok" style="color:var(--gray-6);"></i><span style="font-weight:600;color:var(--ink);">TikTok</span><span style="color:var(--gray-6);">7–9 pm any day</span></div>
+              <div style="display:flex;align-items:center;gap:8px;font-size:12px;"><i class="ti ti-brand-linkedin" style="color:var(--gray-6);"></i><span style="font-weight:600;color:var(--ink);">LinkedIn</span><span style="color:var(--gray-6);">Tue–Thu 8–10 am</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hashtags + CTA -->
+        <div style="background:var(--ink);border-radius:12px;padding:16px 20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div style="flex:1;">
+            <div style="font-size:11px;font-weight:700;color:var(--lime);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.06em;">Recommended hashtags</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px;">
+              <span style="background:rgba(255,255,255,0.1);color:#fff;border-radius:8px;padding:3px 10px;font-size:11.5px;font-weight:600;">#DevOps</span>
+              <span style="background:rgba(255,255,255,0.1);color:#fff;border-radius:8px;padding:3px 10px;font-size:11.5px;font-weight:600;">#SaaSFounders</span>
+              <span style="background:rgba(255,255,255,0.1);color:#fff;border-radius:8px;padding:3px 10px;font-size:11.5px;font-weight:600;">#BuildInPublic</span>
+              <span style="background:rgba(255,255,255,0.1);color:#fff;border-radius:8px;padding:3px 10px;font-size:11.5px;font-weight:600;">#B2BSaaS</span>
+              <span style="background:rgba(255,255,255,0.1);color:#fff;border-radius:8px;padding:3px 10px;font-size:11.5px;font-weight:600;">#TechStartup</span>
+            </div>
+          </div>
+          <a href="#waitlist" class="btn-primary" style="padding:10px 20px;font-size:13px;white-space:nowrap;flex-shrink:0;">Generate mine <i class="ti ti-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT CALENDAR -->
+<section class="deep-section">
+  <div class="container">
+    <div class="deep-head"><span class="deep-tag">MODULE 03</span></div>
+    <h2>Content Calendar — a living grid, not a static sheet</h2>
+    <p class="section-sub">Spreadsheet-familiar, but every row is wired into the rest of the pipeline. Each tab belongs to one Content Strategy.</p>
+    <div class="cal-tabs">
+      <div class="cal-tab active"><i class="ti ti-rocket" style="margin-right:5px;"></i>Q3 SaaS Launch</div>
+      <div class="cal-tab"><i class="ti ti-tools-kitchen-2" style="margin-right:5px;"></i>Restaurant Promo</div>
+      <div class="cal-tab"><i class="ti ti-plus" style="margin-right:4px;"></i>New tab</div>
+    </div>
+    <div class="cal-table-wrap">
+      <table class="cal-table">
+        <thead><tr><th><i class="ti ti-calendar" style="margin-right:4px;"></i>Date</th><th>Topic</th><th><i class="ti ti-user" style="margin-right:4px;"></i>Assigned to</th><th><i class="ti ti-share" style="margin-right:4px;"></i>Platforms</th><th>Post type</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          <tr><td>Jul 2</td><td>Onboarding pain points</td><td>Aisha</td><td>IG · TikTok</td><td>Reel</td><td><span class="status-pill status-ready">Ready</span></td><td><button class="cal-btn create">Create</button><button class="cal-btn publish">Publish</button></td></tr>
+          <tr><td>Jul 4</td><td>Customer case study</td><td>Omar</td><td>LinkedIn</td><td>Carousel</td><td><span class="status-pill status-pending">Pending review</span></td><td><button class="cal-btn create">Create</button><button class="cal-btn publish">Publish</button></td></tr>
+          <tr><td>Jul 6</td><td>Founder hot take</td><td>Aisha</td><td>X · LinkedIn</td><td>Text</td><td><span class="status-pill status-scheduled">Scheduled</span></td><td><button class="cal-btn create">Create</button><button class="cal-btn publish">Publish</button></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--gray-6);margin-top:18px;"><b>Create</b> opens the canvas to build the post. <b>Publish</b> opens a popup to edit settings and send it live.</p>
+  </div>
+</section>
+
+<!-- TREND SCRAPING -->
+<section class="deep-section alt">
+  <div class="container">
+    <div class="deep-head"><span class="deep-tag">MODULE 04</span></div>
+    <h2>Trend Scraping — the radar on every platform</h2>
+    <p class="section-sub">Search a competitor's handle and get a full breakdown of trending audio, hashtags, and short-form content — labeled by platform, saveable in one tap.</p>
+    <div class="trend-search">
+      <i class="ti ti-search"></i>
+      <input type="text" placeholder="Search a competitor account or keyword…" readonly />
+      <span class="trend-filter"><i class="ti ti-adjustments-horizontal" style="font-size:11px;margin-right:3px;"></i>Platform: All</span>
+      <span class="trend-filter"><i class="ti ti-world" style="font-size:11px;margin-right:3px;"></i>Location: Global</span>
+      <span class="trend-filter"><i class="ti ti-clock" style="font-size:11px;margin-right:3px;"></i>Last 7 days</span>
+    </div>
+    <div class="trend-cols">
+      <div>
+        <div class="trend-col-head"><i class="ti ti-music" style="color:#6A1B9A;"></i> Trending Music</div>
+        <div class="trend-item"><span><i class="ti ti-brand-tiktok" style="margin-right:6px;color:var(--gray-4);font-size:13px;"></i>"Late Night Drive" — rising</span><span class="save-pill">Save</span></div>
+        <div class="trend-item"><span><i class="ti ti-brand-instagram" style="margin-right:6px;color:var(--gray-4);font-size:13px;"></i>"Soft Pop Loop"</span><span class="save-pill">Save</span></div>
+      </div>
+      <div>
+        <div class="trend-col-head"><i class="ti ti-hash" style="color:#1565C0;"></i> Hashtags</div>
+        <div class="trend-item"><span><i class="ti ti-brand-tiktok" style="margin-right:6px;color:var(--gray-4);font-size:13px;"></i>#SaaSFounders</span><span class="save-pill">Save</span></div>
+        <div class="trend-item"><span><i class="ti ti-brand-instagram" style="margin-right:6px;color:var(--gray-4);font-size:13px;"></i>#BuildInPublic</span><span class="save-pill">Save</span></div>
+      </div>
+      <div>
+        <div class="trend-col-head"><i class="ti ti-device-mobile" style="color:#AD1457;"></i> Short-form Content</div>
+        <div class="trend-item"><span><i class="ti ti-brand-tiktok" style="margin-right:6px;color:var(--gray-4);font-size:13px;"></i>"Day in the life" format</span><span class="save-pill">Save</span></div>
+        <div class="trend-item"><span><i class="ti ti-brand-youtube" style="margin-right:6px;color:var(--gray-4);font-size:13px;"></i>"3 mistakes" listicle</span><span class="save-pill">Save</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENT BREAKDOWN — LIGHT -->
+<section class="breakdown-section deep-section" id="breakdown">
+  <div class="container">
+    <div class="deep-head"><span class="deep-tag">MODULE 08</span></div>
+    <h2>Content Breakdown — reverse-engineer what worked</h2>
+    <p class="section-sub">Drop in a competitor's video. HayViral lays it out frame-by-frame: hooks, cuts, audio spikes, text overlays, and pacing — mapped to a timeline you can study and save.</p>
+    <div class="filmstrip-wrap">
+      <div class="filmstrip">
+        <div class="frame"><div class="frame-thumb hook"><div class="frame-tag">HOOK</div></div><div class="frame-time">0:00</div></div>
+        <div class="frame"><div class="frame-thumb hook"><div class="frame-tag">TEXT IN</div></div><div class="frame-time">0:02</div></div>
+        <div class="frame"><div class="frame-thumb"><div class="frame-tag">B-ROLL</div></div><div class="frame-time">0:05</div></div>
+        <div class="frame"><div class="frame-thumb cut"><div class="frame-tag">CUT</div></div><div class="frame-time">0:08</div></div>
+        <div class="frame"><div class="frame-thumb"><div class="frame-tag">CLOSE-UP</div></div><div class="frame-time">0:11</div></div>
+        <div class="frame"><div class="frame-thumb cut"><div class="frame-tag">AUDIO SPIKE</div></div><div class="frame-time">0:14</div></div>
+        <div class="frame"><div class="frame-thumb"><div class="frame-tag">CTA</div></div><div class="frame-time">0:17</div></div>
+      </div>
+      <div class="breakdown-legend">
+        <div class="bl-item"><div class="bl-dot" style="background:#6EBD3F;"></div>Hook / text overlay</div>
+        <div class="bl-item"><div class="bl-dot" style="background:#2B8A9E;"></div>Cut / audio spike</div>
+        <div class="bl-item"><div class="bl-dot" style="background:#024E63;"></div>Visual / shot type</div>
+      </div>
+      <div class="breakdown-tags">
+        <span class="bd-tag"><i class="ti ti-flame" style="margin-right:4px;color:#E65100;"></i>Tone: energetic</span>
+        <span class="bd-tag"><i class="ti ti-clock" style="margin-right:4px;"></i>Duration: 0:19</span>
+        <span class="bd-tag"><i class="ti ti-camera" style="margin-right:4px;"></i>Camera: handheld</span>
+        <span class="bd-tag"><i class="ti ti-route" style="margin-right:4px;"></i>problem → reveal → CTA</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREATE CONTENT -->
+<section class="deep-section">
+  <div class="container">
+    <div class="deep-head"><span class="deep-tag">MODULE 05 + 09</span></div>
+    <h2>Create Content — a canvas, not a checklist</h2>
+    <p class="section-sub">Drag AI nodes onto an open canvas and connect them. Ideate, generate, edit, and export — without leaving the page.</p>
+    <div class="canvas-wrap">
+      <svg viewBox="0 0 820 240" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M2 1.5L8 5L2 8.5" fill="none" stroke="#8FA3A8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+        </defs>
+        <!-- Claude node -->
+        <rect x="20" y="90" width="140" height="56" rx="12" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5"/>
+        <text class="sv-b" x="90" y="114" text-anchor="middle" fill="#2E7D32">Claude</text>
+        <text class="sv-s" x="90" y="131" text-anchor="middle">Ideation node</text>
+        <!-- Video prompt -->
+        <rect x="210" y="90" width="155" height="56" rx="12" fill="#fff" stroke="#D8E4E6" stroke-width="1.5"/>
+        <text class="sv-b" x="287" y="114" text-anchor="middle" fill="#00303C">Video Prompt</text>
+        <text class="sv-s" x="287" y="131" text-anchor="middle">+ Voice-Over prompt</text>
+        <!-- Generate -->
+        <rect x="415" y="90" width="145" height="56" rx="12" fill="#fff" stroke="#D8E4E6" stroke-width="1.5"/>
+        <text class="sv-b" x="487" y="114" text-anchor="middle" fill="#00303C">Generate</text>
+        <text class="sv-s" x="487" y="131" text-anchor="middle">Videos + Voice</text>
+        <!-- Save folder -->
+        <rect x="608" y="18" width="140" height="56" rx="12" fill="#fff" stroke="#D8E4E6" stroke-width="1.5"/>
+        <text class="sv-b" x="678" y="42" text-anchor="middle" fill="#00303C">Edited & published</text>
+        <text class="sv-s" x="678" y="59" text-anchor="middle">Uploaded</text>
+        <!-- Import Canva -->
+        <rect x="608" y="164" width="175" height="56" rx="12" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="1.5"/>
+        <text class="sv-b" x="695" y="188" text-anchor="middle" fill="#2E7D32">Import Canva</text>
+        <text class="sv-s" x="695" y="205" text-anchor="middle">Editor → Edit → Published</text>
+        <!-- arrows -->
+        <path d="M160 118 H210" stroke="#C8E3E8" stroke-width="2" marker-end="url(#arr)"/>
+        <path d="M365 118 H415" stroke="#C8E3E8" stroke-width="2" marker-end="url(#arr)"/>
+        <path d="M560 108 Q585 62 608 44" fill="none" stroke="#C8E3E8" stroke-width="2" marker-end="url(#arr)"/>
+        <path d="M560 128 Q585 174 608 186" fill="none" stroke="#C8E3E8" stroke-width="2" marker-end="url(#arr)"/>
+      </svg>
+    </div>
+    <div class="feature-grid">
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#FCE4EC;color:#AD1457;"><i class="ti ti-scissors"></i></div>
+        <div class="feat-title">Shorts from long-form</div>
+        <div class="feat-desc">Drop a long video in and the AI cuts it into multiple short-form clips, each with its own hook.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#E8EAF6;color:#283593;"><i class="ti ti-wand"></i></div>
+        <div class="feat-title">Single-prompt editing</div>
+        <div class="feat-desc">Strip silences, color-correct, and burn in animated captions — described in one sentence.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon" style="background:#E0F7FA;color:#00838F;"><i class="ti ti-folder-symlink"></i></div>
+        <div class="feat-title">Exports straight to Calendar</div>
+        <div class="feat-desc">Finished assets save directly into the Creative field of the matching Content Calendar row.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VS TABLE -->
+<section class="vs-section" id="compare">
+  <div class="container">
+    <p class="section-label">Competitive positioning</p>
+    <h2>How HayViral sits in the market</h2>
+    <p class="section-sub">Most tools own one column. HayViral bridges the gap between raw automation, design control, and active distribution.</p>
+    
+    <div class="vs-table-wrap">
+      <table class="vs-table">
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th><i class="ti ti-route" style="margin-right:4px;"></i>n8n</th>
+            <th><i class="ti ti-brain" style="margin-right:4px;"></i>Claude</th>
+            <th><i class="ti ti-palette" style="margin-right:4px;"></i>Canva</th>
+            <th><i class="ti ti-brand-hootsuite" style="margin-right:4px;"></i>Hootsuite</th>
+            <th class="you-head"><i class="ti ti-sparkles" style="margin-right:4px;"></i>HayViral</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Core Ecosystem & Agents -->
+          <tr>
+            <td class="row-label">Multi-platform AI agents in one place</td>
+            <td><span class="check">✓</span></td>
+            <td><span class="partial">partial</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td class="you-col"><span class="check">✓</span></td>
+          </tr>
+          
+          <!-- Content Control Advantage -->
+          <tr>
+            <td class="row-label">Fully layered, editable video/image outputs</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+            <td class="you-col"><span class="check">✓</span></td>
+          </tr>
+
+          <!-- Competitor Analysis Feature -->
+          <tr>
+            <td class="row-label">Frame-by-frame competitor breakdown</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="partial">partial</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td class="you-col"><span class="check">✓</span></td>
+          </tr>
+
+          <!-- Listening & Trends -->
+          <tr>
+            <td class="row-label">Platform-native trend scraping</td>
+            <td><span class="partial">partial</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="partial">partial</span></td>
+            <td class="you-col"><span class="check">✓</span></td>
+          </tr>
+
+          <!-- Studio & Publishing -->
+          <tr>
+            <td class="row-label">AI-assisted image &amp; video editing suite</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">✕</span></td>
+            <td class="you-col"><span class="check">✓</span></td>
+          </tr>
+
+          <tr>
+            <td class="row-label">Native publishing automation &amp; calendar</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="partial">partial</span></td>
+            <td><span class="check">✓</span></td>
+            <td class="you-col"><span class="check">✓</span></td>
+          </tr>
+
+          <!-- Team Management -->
+          <tr>
+            <td class="row-label">Team tasks, deadlines &amp; reminders</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="partial">partial</span></td>
+            <td><span class="partial">partial</span></td>
+            <td class="you-col"><span class="check">✓</span></td>
+          </tr>
+
+          <!-- One-Click Value -->
+          <tr>
+            <td class="row-label">One-click global performance reporting</td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="cross">✕</span></td>
+            <td><span class="check">✓</span></td>
+            <td class="you-col"><span class="check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS — LIGHT -->
+<section class="how-section" id="how-it-works">
+  <div class="container">
+    <p class="section-label">Under the hood</p>
+    <h2>What happens from idea to live post</h2>
+    <p class="section-sub">Five stages. One continuous pipeline. Nothing re-entered by hand.</p>
+    <div class="timeline">
+      <div class="tl-line"></div>
+      <div class="tl-item">
+        <div class="tl-dot"><i class="ti ti-target-arrow"></i></div>
+        <div class="tl-body"><div class="tl-title">Strategy sets the direction</div><div class="tl-desc">Audience, niche, and channels feed a generated playbook instead of a blank page.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><i class="ti ti-radar-2"></i></div>
+        <div class="tl-body"><div class="tl-title">Trend Scraping &amp; Breakdown find the hook</div><div class="tl-desc">Rising audio and hashtags surface, and a competitor's top video gets dissected frame-by-frame.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><i class="ti ti-writing"></i></div>
+        <div class="tl-body"><div class="tl-title">Scripting &amp; Create build the asset</div><div class="tl-desc">Claude drafts the script and voice-over, Canva renders the visual, and the canvas exports it.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><i class="ti ti-calendar-event"></i></div>
+        <div class="tl-body"><div class="tl-title">Calendar assigns and queues it</div><div class="tl-desc">The finished creative lands in its row, assigned to a teammate, status flips to ready.</div></div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><i class="ti ti-send"></i></div>
+        <div class="tl-body"><div class="tl-title">Publish &amp; Report close the loop</div><div class="tl-desc">It goes live across platforms and the dashboard tracks clicks, conversions, and retention afterward.</div></div>
+      </div>
+    </div>
+    <div class="insight-box">
+      <p><strong>The unfair advantage</strong> isn't any single feature — it's that strategy, research, creation, and reporting share the same workspace. Nothing gets re-typed, re-uploaded, or re-explained between steps.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="waitlist">
+  <div class="container">
+    <p class="section-label">Get started</p>
+    <h2>Stop relaying information between apps.</h2>
+    <p class="section-sub">Sign up and get pre-built templates for Content Strategy and your first Content Calendar.</p>
+    <div class="hero-buttons" style="justify-content:center;">
+      <a class="btn-primary" href="https://form.jotform.com/261795977170068">Join our Wishlist <i class="ti ti-arrow-right"></i></a>
+      <a class="btn-ghost" href="mailto:hello@hayviral.com">Talk to the team</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 HayViral · <a href="mailto:hello@hayviral.com" style="color:inherit">hello@hayviral.com</a></p>
+</footer>
+
+<script>
+  const fadeEls = document.querySelectorAll('.feat-card,.stat-card,.tool-chip,.mod-card,.platform-card,.tl-item');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if(e.isIntersecting){
+        e.target.style.animationDelay = (i * 0.04) + 's';
+        e.target.classList.add('fade-up');
+        obs.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.08});
+  fadeEls.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
